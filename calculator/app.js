@@ -75,7 +75,15 @@ function operation(oper) {
 }
 
 function clear(id) {
-  console.log(`click on btn ${id}! `)
+  if (id === 'ce') {
+    display.value = '0';
+    MemoryNewNumber = true;
+  } else if (id === 'c') {
+    display.value = '0';
+    MemoryNewNumber = true;
+    MemoryCurrentNumber = 0;
+    MemoryPendingOperation = '';
+  };
 };
 
 function decimal(argument) {
