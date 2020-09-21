@@ -12,6 +12,7 @@ let MemoryCurrentNumber = 0;
 let MemoryNewNumber = false;
 let MemoryPendingOperation = '';
 
+
 for (let i = 0 ; i < numbers.length; i++ ) {
   let number = numbers[i];
   number.addEventListener('click', function(e) {
@@ -26,13 +27,12 @@ for (let i = 0 ; i < operators.length; i++ ) {
   });
 };
 
-// for (let i = 0 ; i < minusBtn.length; i++ ) {
-//   let minusR = minusBtn[i];
-//   minusR.addEventListener('click', function (e) {
-//     clear(e.srcElement.id);
-//     console.log('hello')
-//   });
-// };
+for (let i = 0 ; i < clearBtns.length; i++ ) {
+  let clearBtn = clearBtns[i];
+  clearBtn.addEventListener('click', function (e) {	
+    clear(e.srcElement.id);
+  });
+};
 
 for (let i = 0 ; i < sqroots.length; i++ ) {
   let sqroot = sqroots[i];
@@ -41,16 +41,11 @@ for (let i = 0 ; i < sqroots.length; i++ ) {
   });
 };
 
-// for (let i = 0 ; i < sqroots.length; i++ ) {
-//   let sqroot = sqroots[i];
-//   sqroot.addEventListener('click', function (e) {
-//     sqr(e.srcElement.id);
-//   });
-// };
-
 resultBtn.addEventListener('click', result);
 
 decimalBtn.addEventListener('click', decimal);
+
+minusBtn.addEventListener('click', minus)
 
 // func
 
@@ -106,8 +101,12 @@ function clear(id) {
 
 function sqr(id) {
   if (id === 's') {
-    display.value = Math.sqrt(display.value);
-  };
+    if (display.value > 0) {
+      display.value = Math.sqrt(display.value);
+    } else {
+      display.value = 'НЕВОЗМОЖНО';
+    };
+  } 
  };
 
 function decimal(argument) {
@@ -124,16 +123,13 @@ function decimal(argument) {
   display.value = localDecimalMemory;
 };
 
-// function decimal(argument) {
-//   let localDecimalMemory = display.value;
+function minus(argument2) {
+  let localD = display.value;
 
-//   if (MemoryNewNumber) {
-//     localOperationMemory = '0.';
-//     MemoryNewNumber = false;
-//   } else {
-//       if(localDecimalMemory.indexOf('.') === -1) {
-//         localDecimalMemory += '.';
-//       };
-//   };
-//   display.value = localDecimalMemory;
-// };
+  if (display.value == '0') {
+    localD = `-`;
+    MemoryNewNumber = false;
+  } else {
+  };
+  display.value = localD;
+};
