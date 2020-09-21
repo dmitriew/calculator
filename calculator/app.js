@@ -39,6 +39,11 @@ decimalBtn.addEventListener('click', decimal);
 // func
 
 function numberPress(number) {
+  if(display.value === '0') {
+    display.value = number;
+  } else {
+    display.value += number;
+  }
   console.log('клик по кнопке с номером!' + number)
 };
 
