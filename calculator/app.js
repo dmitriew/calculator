@@ -7,6 +7,7 @@ const clearBtns = document.querySelectorAll('.clear-btn')
 const resultBtn = document.getElementById('result');
 const display = document.getElementById('display');
 const sqroots = document.querySelectorAll('.square-root');
+const minusBtn = document.getElementById('minus');
 let MemoryCurrentNumber = 0;
 let MemoryNewNumber = false;
 let MemoryPendingOperation = '';
@@ -18,7 +19,6 @@ for (let i = 0 ; i < numbers.length; i++ ) {
   });
 };
 
-
 for (let i = 0 ; i < operators.length; i++ ) {
   let operatorBtn = operators[i];
   operatorBtn.addEventListener('click', function (e) {
@@ -26,13 +26,13 @@ for (let i = 0 ; i < operators.length; i++ ) {
   });
 };
 
-for (let i = 0 ; i < clearBtns.length; i++ ) {
-  let clearBtn = clearBtns[i];
-  clearBtn.addEventListener('click', function (e) {
-    clear(e.srcElement.id);
-  });
-};
-
+// for (let i = 0 ; i < minusBtn.length; i++ ) {
+//   let minusR = minusBtn[i];
+//   minusR.addEventListener('click', function (e) {
+//     clear(e.srcElement.id);
+//     console.log('hello')
+//   });
+// };
 
 for (let i = 0 ; i < sqroots.length; i++ ) {
   let sqroot = sqroots[i];
@@ -41,6 +41,12 @@ for (let i = 0 ; i < sqroots.length; i++ ) {
   });
 };
 
+// for (let i = 0 ; i < sqroots.length; i++ ) {
+//   let sqroot = sqroots[i];
+//   sqroot.addEventListener('click', function (e) {
+//     sqr(e.srcElement.id);
+//   });
+// };
 
 resultBtn.addEventListener('click', result);
 
@@ -61,28 +67,19 @@ function numberPress(number) {
   };
 };
 
-function sqr(id) {
-  if (id === 's') {
-    let b = Math.sqrt(MemoryCurrentNumber);
-    MemoryCurrentNumber = b;
-    display.value = b;
-    console.log(MemoryCurrentNumber)
-  }
- };
-
 function operation(oper) {
+  let cf = 10;
   let localOperationMemory = display.value;
-
   if (MemoryNewNumber && MemoryPendingOperation !== '=') {
     display.value = MemoryCurrentNumber;
   } else {
     MemoryNewNumber = true;
     if (MemoryPendingOperation === '+') {
-      MemoryCurrentNumber += +localOperationMemory;
+      MemoryCurrentNumber = ((MemoryCurrentNumber * cf) + (+localOperationMemory * cf)) / cf;
     } else if (MemoryPendingOperation === '-') {
       MemoryCurrentNumber -= +localOperationMemory;
     } else if (MemoryPendingOperation === '*') {
-      MemoryCurrentNumber *= +localOperationMemory;
+      MemoryCurrentNumber = ((MemoryCurrentNumber * cf) * (+localOperationMemory * cf)) / (cf * cf);
     } else if (MemoryPendingOperation === '/') {
       MemoryCurrentNumber /= +localOperationMemory;
     } else if (MemoryPendingOperation === '^') {
@@ -107,6 +104,12 @@ function clear(id) {
   };
 };
 
+function sqr(id) {
+  if (id === 's') {
+    display.value = Math.sqrt(display.value);
+  };
+ };
+
 function decimal(argument) {
   let localDecimalMemory = display.value;
 
@@ -120,3 +123,17 @@ function decimal(argument) {
   };
   display.value = localDecimalMemory;
 };
+
+// function decimal(argument) {
+//   let localDecimalMemory = display.value;
+
+//   if (MemoryNewNumber) {
+//     localOperationMemory = '0.';
+//     MemoryNewNumber = false;
+//   } else {
+//       if(localDecimalMemory.indexOf('.') === -1) {
+//         localDecimalMemory += '.';
+//       };
+//   };
+//   display.value = localDecimalMemory;
+// };
