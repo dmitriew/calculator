@@ -1,5 +1,6 @@
 body {
   font-size: 20px;
+  font-family: 'Orbitron', sans-serif;
 }
 .main {
   display: flex;
@@ -13,6 +14,7 @@ body {
   border-radius: 6px;
 }
 .calc-display-input {
+  font-family: 'Orbitron', sans-serif;
   width: 360px;
   height: 60px;
   margin: 20px 0;
@@ -28,6 +30,7 @@ body {
   padding: 5px;
 }
 .btn {
+  font-family: 'Orbitron', sans-serif;
   width: 85px;
   height: 60px;
   background-color: #f4f4f4;
