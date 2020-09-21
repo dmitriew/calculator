@@ -6,6 +6,7 @@ const decimalBtn = document.getElementById('decimal');
 const clearBtns = document.querySelectorAll('.clear-btn')
 const resultBtn = document.getElementById('result');
 const display = document.getElementById('display');
+const sqroots = document.querySelectorAll('.square-root');
 let MemoryCurrentNumber = 0;
 let MemoryNewNumber = false;
 let MemoryPendingOperation = '';
@@ -32,6 +33,15 @@ for (let i = 0 ; i < clearBtns.length; i++ ) {
   });
 };
 
+
+for (let i = 0 ; i < sqroots.length; i++ ) {
+  let sqroot = sqroots[i];
+  sqroot.addEventListener('click', function (e) {
+    sqr(e.srcElement.id);
+  });
+};
+
+
 resultBtn.addEventListener('click', result);
 
 decimalBtn.addEventListener('click', decimal);
@@ -51,6 +61,15 @@ function numberPress(number) {
   };
 };
 
+function sqr(id) {
+  if (id === 's') {
+    let b = Math.sqrt(MemoryCurrentNumber);
+    MemoryCurrentNumber = b;
+    display.value = b;
+    console.log(MemoryCurrentNumber)
+  }
+ };
+
 function operation(oper) {
   let localOperationMemory = display.value;
 
@@ -66,7 +85,9 @@ function operation(oper) {
       MemoryCurrentNumber *= +localOperationMemory;
     } else if (MemoryPendingOperation === '/') {
       MemoryCurrentNumber /= +localOperationMemory;
-    } else {
+    } else if (MemoryPendingOperation === '^') {
+      MemoryCurrentNumber **= +localOperationMemory;
+    }else {
       MemoryCurrentNumber = +localOperationMemory;
     }
     display.value = MemoryCurrentNumber;
