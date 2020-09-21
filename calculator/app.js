@@ -39,10 +39,15 @@ decimalBtn.addEventListener('click', decimal);
 // func
 
 function numberPress(number) {
-  if(display.value === '0') {
+  if(MemoryNewNumber) {
     display.value = number;
+    MemoryNewNumber = false;
   } else {
-    display.value += number;
+    if(display.value === '0') {
+      display.value = number;
+    } else {
+      display.value += number;
+    };
   };
 };
 
