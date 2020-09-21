@@ -72,7 +72,6 @@ function operation(oper) {
     display.value = MemoryCurrentNumber;
     MemoryPendingOperation = oper;
   }
-  console.log('КЛИК')
 }
 
 function clear(id) {
@@ -80,9 +79,15 @@ function clear(id) {
 };
 
 function decimal(argument) {
-  console.log('hello click 123123');
-};
+  let localDecimalMemory = display.value;
 
-// function result(argument) {
-//   console.log('hello click result');
-// };
+  if (MemoryNewNumber) {
+    localOperationMemory = '0.';
+    MemoryNewNumber = false;
+  } else {
+      if(localDecimalMemory.indexOf('.') === -1) {
+        localDecimalMemory += '.';
+      };
+  };
+  display.value = localDecimalMemory;
+};
