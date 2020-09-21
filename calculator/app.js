@@ -6,9 +6,9 @@ const decimalBtn = document.getElementById('decimal');
 const clearBtns = document.querySelectorAll('.clear-btn')
 const resultBtn = document.getElementById('result');
 const display = document.getElementById('display');
-const memoryCurrentNumber = 0;
-const memoryNewNumber = false;
-const memoryPendingOperation = '';
+let MemoryCurrentNumber = 0;
+let MemoryNewNumber = false;
+let MemoryPendingOperation = '';
 
 for (let i = 0 ; i < numbers.length; i++ ) {
   let number = numbers[i];
@@ -43,13 +43,32 @@ function numberPress(number) {
     display.value = number;
   } else {
     display.value += number;
-  }
-  console.log('клик по кнопке с номером!' + number)
+  };
 };
 
-function operation(symbol) {
-  console.log('клик по кнопке с операциями' + ' ' + symbol)
-};
+function operation(oper) {
+  let localOperationMemory = display.value;
+
+  if (MemoryNewNumber && MemoryPendingOperation !== '=') {
+    display.value = MemoryCurrentNumber;
+  } else {
+    MemoryNewNumber = true;
+    if (MemoryPendingOperation === '+') {
+      MemoryCurrentNumber += +localOperationMemory;
+    } else if (MemoryPendingOperation === '-') {
+      MemoryCurrentNumber -= +localOperationMemory;
+    } else if (MemoryPendingOperation === '*') {
+      MemoryCurrentNumber *= +localOperationMemory;
+    } else if (MemoryPendingOperation === '/') {
+      MemoryCurrentNumber /= +localOperationMemory;
+    } else {
+      MemoryCurrentNumber = +localOperationMemory;
+    }
+    display.value = MemoryCurrentNumber;
+    MemoryPendingOperation = oper;
+  }
+  console.log('КЛИК')
+}
 
 function clear(id) {
   console.log(`click on btn ${id}! `)
@@ -59,6 +78,6 @@ function decimal(argument) {
   console.log('hello click 123123');
 };
 
-function result(argument) {
-  console.log('hello click result');
-};
+// function result(argument) {
+//   console.log('hello click result');
+// };
