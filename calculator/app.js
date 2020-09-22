@@ -72,7 +72,7 @@ function operation(oper) {
     if (MemoryPendingOperation === '+') {
       MemoryCurrentNumber = ((MemoryCurrentNumber * cf) + (+localOperationMemory * cf)) / cf;
     } else if (MemoryPendingOperation === '-') {
-      MemoryCurrentNumber -= +localOperationMemory;
+      MemoryCurrentNumber -= localOperationMemory;
     } else if (MemoryPendingOperation === '*') {
       MemoryCurrentNumber = ((MemoryCurrentNumber * cf) * (+localOperationMemory * cf)) / (cf * cf);
     } else if (MemoryPendingOperation === '/') {
@@ -127,9 +127,10 @@ function minus(argument2) {
   let localD = display.value;
 
   if (display.value == '0') {
-    localD = `-`;
+    localD = '-';
     MemoryNewNumber = false;
   } else {
+        localD = display.value;
   };
   display.value = localD;
 };
