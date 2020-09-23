@@ -12,7 +12,6 @@ let MemoryCurrentNumber = 0;
 let MemoryNewNumber = false;
 let MemoryPendingOperation = '';
 
-
 for (let i = 0 ; i < numbers.length; i++ ) {
   let number = numbers[i];
   number.addEventListener('click', function(e) {
@@ -54,15 +53,12 @@ function numberPress(number) {
       let singMinus = '-'
       display.value = singMinus + number;
       MemoryNewNumber = false;
-      console.log('нужный цикл цифр')
     } else if (MemoryNewNumber){
     display.value = number;
     MemoryNewNumber = false;
     } else if(display.value === '0' ) {
       display.value = number;
-      console.log('ОПЕРАЦИя С НУЛЯ')
     } else {
-      console.log('ЕСЛИ УЖЕ СТОЯТ ЧИСЛО')
       display.value += number;
     };
   };
@@ -128,17 +124,12 @@ function decimal(argument) {
   display.value = localDecimalMemory;
 };
 
-
-
 function minus(argument2) {
   let minusMemory = ''
   if (MemoryCurrentNumber == 0) {
     display.value = '-'
     MemoryNewNumber = true;
-    console.log('Зашел в ноль!')
   } else {
-    console.log('НАЖАЛ НА МИНУС И МЕНЬШЕ НУля')
-    console.log(display.value)
     minusMemory = display.value;
     MemoryNewNumber = true;
   };
