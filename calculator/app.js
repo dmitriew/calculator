@@ -50,17 +50,22 @@ minusBtn.addEventListener('click', minus)
 // func
 
 function numberPress(number) {
-  if(MemoryNewNumber) {
+  if(display.value === '-') {
+      let singMinus = '-'
+      display.value = singMinus + number;
+      MemoryNewNumber = false;
+      console.log('нужный цикл цифр')
+    } else if (MemoryNewNumber){
     display.value = number;
     MemoryNewNumber = false;
-  } else {
-    if(display.value === '0') {
+    } else if(display.value === '0' ) {
       display.value = number;
+      console.log('ОПЕРАЦИя С НУЛЯ')
     } else {
+      console.log('ЕСЛИ УЖЕ СТОЯТ ЧИСЛО')
       display.value += number;
     };
   };
-};
 
 function operation(oper) {
   let cf = 10;
@@ -123,14 +128,18 @@ function decimal(argument) {
   display.value = localDecimalMemory;
 };
 
-function minus(argument2) {
-  let localD = display.value;
 
-  if (display.value == '0') {
-    localD = '-';
-    MemoryNewNumber = false;
+
+function minus(argument2) {
+  let minusMemory = ''
+  if (MemoryCurrentNumber == 0) {
+    display.value = '-'
+    MemoryNewNumber = true;
+    console.log('Зашел в ноль!')
   } else {
-        localD = display.value;
+    console.log('НАЖАЛ НА МИНУС И МЕНЬШЕ НУля')
+    console.log(display.value)
+    minusMemory = display.value;
+    MemoryNewNumber = true;
   };
-  display.value = localD;
 };
