@@ -50,8 +50,7 @@ minusBtn.addEventListener('click', minus)
 
 function numberPress(number) {
   if(display.value === '-') {
-      let singMinus = '-'
-      display.value = singMinus + number;
+      display.value = `-${number}`;
       MemoryNewNumber = false;
     } else if (MemoryNewNumber){
     display.value = number;
@@ -59,7 +58,7 @@ function numberPress(number) {
     } else if(display.value === '0' ) {
       display.value = number;
     } else {
-      display.value += number;
+      display.value +=  number;
     };
   };
 
@@ -73,11 +72,11 @@ function operation(oper) {
     if (MemoryPendingOperation === '+') {
       MemoryCurrentNumber = ((MemoryCurrentNumber * cf) + (+localOperationMemory * cf)) / cf;
     } else if (MemoryPendingOperation === '-') {
-      MemoryCurrentNumber -= localOperationMemory;
+      MemoryCurrentNumber = ((MemoryCurrentNumber * cf) - (+localOperationMemory * cf)) / cf;
     } else if (MemoryPendingOperation === '*') {
       MemoryCurrentNumber = ((MemoryCurrentNumber * cf) * (+localOperationMemory * cf)) / (cf * cf);
     } else if (MemoryPendingOperation === '/') {
-      MemoryCurrentNumber /= +localOperationMemory;
+      MemoryCurrentNumber = ((MemoryCurrentNumber * cf) / (+localOperationMemory * cf));
     } else if (MemoryPendingOperation === '^') {
       MemoryCurrentNumber **= +localOperationMemory;
     }else {
@@ -128,9 +127,11 @@ function minus(argument2) {
   let minusMemory = ''
   if (MemoryCurrentNumber == 0) {
     display.value = '-'
+    MemoryPendingOperation = ''
     MemoryNewNumber = true;
-  } else {
-    minusMemory = display.value;
-    MemoryNewNumber = true;
-  };
+  } else if (MemoryPendingOperation === '+') {
+    MemoryPendingOperation = '-'
+  } else if (MemoryCurrentNumber > 0){
+    display.value = display.value + ' ' + '-';
+  }
 };
